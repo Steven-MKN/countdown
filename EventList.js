@@ -14,10 +14,11 @@ const styles = StyleSheet.create({
 class EventList extends Component {
   state = {
     events: [],
+    intervalRef: null,
   };
 
   componentDidMount() {
-    setInterval(() => {
+    const intervalRef = setInterval(() => {
       this.setState({
         events: this.state.events.map((evt) => ({
           ...evt,
@@ -26,11 +27,20 @@ class EventList extends Component {
       });
     }, 1000);
 
+    this.setState({
+      ...this.state,
+      intervalRef,
+    });
+
     const events = require("./db.json").events.map((e) => ({
       ...e,
       date: new Date(e.date),
     }));
     this.setState({ events });
+  }
+
+  componentWillUnmount() {
+    if (this.state.intervalRef) clearInterval(this.state.intervalRef);
   }
 
   handleAddEvent = () => {
