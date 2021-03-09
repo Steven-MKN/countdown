@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import React from "react";
 import EventList from "./EventList";
 import { NavigationContainer } from "@react-navigation/native";
