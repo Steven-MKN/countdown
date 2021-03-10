@@ -27,13 +27,13 @@ class EventForm extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <view style={styles.fieldContainer}>
+        <View style={styles.fieldContainer}>
           <TextInput
             style={styles.text}
             placeholder="Event title"
             spellCheck={false}
           />
-        </view>
+        </View>
         <TouchableHighlight onPress={this.handleAddPress}>
           <Text>Add</Text>
         </TouchableHighlight>
