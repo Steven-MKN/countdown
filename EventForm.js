@@ -6,6 +6,8 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { formatDateTime } from "./api";
 
 const styles = StyleSheet.create({
   fieldContainer: {
@@ -33,11 +35,17 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
   },
+  borderTop: {
+    borderColor: "#edeeef",
+    borderTopWidth: 0.5,
+  },
 });
 
 class EventForm extends Component {
   state = {
     title: "",
+    date: "",
+    showDatePicker: true,
   };
 
   handleAddPress = () => {
@@ -47,6 +55,10 @@ class EventForm extends Component {
 
   handleChangeTitle = (value) => {
     this.setState({ title: value });
+  };
+
+  handleDatePress = () => {
+    this.setState({ showDatePicker: true });
   };
 
   render() {
@@ -60,6 +72,14 @@ class EventForm extends Component {
             value={this.state.title}
             onChangeText={this.handleChangeTitle}
           />
+          <TextInput
+            style={[styles.text, styles.borderTop]}
+            placeholder="Event Date"
+            spellCheck={false}
+            value={formatDateTime(this.state.date.toString())}
+            editable={!this.state.showDatePicker}
+            onFocus={this.handleDatePress}
+          ></TextInput>
         </View>
         <TouchableHighlight onPress={this.handleAddPress} style={styles.button}>
           <Text style={styles.buttonText}>Add</Text>
