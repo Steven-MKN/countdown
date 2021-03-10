@@ -6,7 +6,7 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker from "react-native-modal-datetime-picker";
 import { formatDateTime } from "./api";
 
 const styles = StyleSheet.create({
