@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
 class EventForm extends Component {
   state = {
     title: "",
-    date: "",
-    showDatePicker: true,
+    date: new Date(),
+    showDatePicker: false,
   };
 
   handleAddPress = () => {
@@ -59,6 +59,20 @@ class EventForm extends Component {
 
   handleDatePress = () => {
     this.setState({ showDatePicker: true });
+  };
+
+  handleDatePicked = (date) => {
+    this.setState({
+      date,
+    });
+
+    this.handleDatePickerHide();
+  };
+
+  handleDatePickerHide = () => {
+    this.setState({
+      showDatePicker: false,
+    });
   };
 
   render() {
@@ -80,6 +94,12 @@ class EventForm extends Component {
             editable={!this.state.showDatePicker}
             onFocus={this.handleDatePress}
           ></TextInput>
+          <DateTimePicker
+            isVisible={this.state.showDatePicker}
+            mode="datetime"
+            onConfirm={this.handleDatePicked}
+            onCancel={this.handleDatePickerHide}
+          />
         </View>
         <TouchableHighlight onPress={this.handleAddPress} style={styles.button}>
           <Text style={styles.buttonText}>Add</Text>
