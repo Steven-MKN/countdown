@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FlatList, Text, StyleSheet } from "react-native";
 import EventCard from "./EventCard";
 import ActionButton from "react-native-action-button";
+import { getEvents } from "./api";
 
 const styles = StyleSheet.create({
   list: {
@@ -32,11 +33,7 @@ class EventList extends Component {
       intervalRef,
     });
 
-    const events = require("./db.json").events.map((e) => ({
-      ...e,
-      date: new Date(e.date),
-    }));
-    this.setState({ events });
+    getEvents().then((events) => this.setState({ events }));
   }
 
   componentWillUnmount() {
